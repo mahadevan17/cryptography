@@ -1,3 +1,3 @@
 # cryptology
-affine cipher: encryption , decryption and crytoanalysis
-hill cipher: encryption , decrytion and crytoanalysis
+#affine cipher: encryption , decryption and crytoanalysis
+#hill cipher: encryption , decrytion and crytoanalysis

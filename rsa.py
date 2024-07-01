@@ -5,9 +5,28 @@
 #pt=ct**d mod p*q
 #public key n,e
 #private key n,d
-
+import math
 import random as ran
 
+
+class NotPrime(Exception):
+    def __init__(self,message):
+        self.message=message
+        super().__init__(self.message)
+        
+
+def is_prime(n):
+    if n<=1:
+        return False
+    else:
+        if n==2:
+            return True
+        else:
+            for i in range(2,int(math.sqrt(n)+1)):
+                if n%i==0:
+                    return False
+    return True
+        
 def gcd(a,b):
     if a<b:
         a,b=b,a
@@ -43,12 +62,24 @@ def rsa_decryption(ct,p,q,t,e):
     return decrypted
 
 
+def user_input():
+    while True:
+        try:
+            p=int(input("enter p: "))
+            q=int(input("enter q: "))
+            if ((not is_prime(p)) or (not is_prime(q))):
+                raise NotPrime("it is not prime try again")
+            break            
+        except NotPrime as e:
+            print("Exception : ",e.message)
+
+    return p,q
+
 #main
 
 pt=int(input("enter the plaintext: "))
+p,q=user_input()
 
-p=int(input("enter p: "))
-q=int(input("enter q: "))
 
 t=Euler_tot(p,q)
 e=ran.randint(2,t)
